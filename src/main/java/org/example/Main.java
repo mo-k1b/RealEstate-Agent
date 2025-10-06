@@ -11,9 +11,12 @@ public class Main {
         estate1.numberOfRooms = 3;
         estate1.sqm = 20;
 
-
+        System.out.println("Before Discount: "+estate1.toString());
         estate1.makeDiscount(10);
-        System.out.println(estate1.toString());
+        System.out.println("After Discount: "+estate1.toString());
+        System.out.println("Total Price: "+estate1.getTotalPrice());
+        System.out.println("Avg Sqm per room: "+estate1.averageSqmPerRoom());
+
 
     }
 }

@@ -71,6 +71,17 @@ public class RealEstate implements PropertyInterface{
 
     @Override
     public int getTotalPrice() {
+        switch (city){
+            case "Budapest":
+                price *= 1.30;
+                break;
+            case "Debrecen":
+                price *= 1.20;
+                break;
+            case "Nyiregyhaza":
+                price *= 1.15;
+                break;
+        }
        return (int) Math.round(price);
     }
 
