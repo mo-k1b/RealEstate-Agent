@@ -8,7 +8,7 @@ public class RealEstate implements PropertyInterface{
 
 
 
-    public enum Genre  {FAMILYHOUSE, CONDOMINIUM, FARM};
+    public enum Genre  {FAMILYHOUSE, FLAT, FARM};
     Genre genre;
 
 

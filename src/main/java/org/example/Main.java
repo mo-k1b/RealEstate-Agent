@@ -1,22 +1,15 @@
 package org.example;
 
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
+        RealEstateAgent.loadFromFile("realestates.txt");
 
-
-        RealEstate estate1 = new RealEstate();
-        estate1.price= 4000;
-        estate1.city = "Nyiregyhaza";
-        estate1.genre = RealEstate.Genre.FAMILYHOUSE;
-        estate1.numberOfRooms = 3;
-        estate1.sqm = 20;
-
-        System.out.println("Before Discount: "+estate1.toString());
-        estate1.makeDiscount(10);
-        System.out.println("After Discount: "+estate1.toString());
-        System.out.println("Total Price: "+estate1.getTotalPrice());
-        System.out.println("Avg Sqm per room: "+estate1.averageSqmPerRoom());
-
-
+        try {
+            RealEstateAgent.displayResults();
+        } catch (IOException e) {
+            System.err.println("Error writing to output file: " + e.getMessage());
+        }
     }
 }
