@@ -1,12 +1,39 @@
 package org.example;
+
 import java.io.*;
 import java.util.*;
 
+/**
+ * Manages a collection of real estate properties and provides analysis tools.
+ * <p>
+ * This class supports loading property data from a file or sample dataset,
+ * performing statistical analysis, and exporting results to a text file.
+ * It handles both {@link RealEstate} and {@link Panel} objects.
+ * </p>
+ *
+ * @version 1.0
+ */
 
+/**
+ * Default constructor for the class
+ */
 public class RealEstateAgent {
+    /**
+     * Stores all loaded real estate properties in a sorted set.
+     */
     private static TreeSet<RealEstate> realEstates = new TreeSet<>();
 
-
+    /**
+     * Loads real estate data from a specified file.
+     * <p>
+     * The file must contain lines formatted as:
+     * <ul>
+     *   <li>{@code REALESTATE#city#price#sqm#rooms#genre}</li>
+     *   <li>{@code PANEL#city#price#sqm#rooms#genre#floor#isInsulated}</li>
+     * </ul>
+     *
+     * @param filename the name of the file to read from
+     */
     public static void loadFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -48,7 +75,12 @@ public class RealEstateAgent {
         }
     }
 
-
+    /**
+     * Loads a predefined set of sample real estate data.
+     * <p>
+     * This method is useful for testing or demonstration purposes.
+     * </p>
+     */
     private static void loadSampleData() {
         realEstates.add(new RealEstate("Budapest", 250000, 100, 4, RealEstate.Genre.FLAT));
         realEstates.add(new RealEstate("Debrecen", 220000, 120, 5, RealEstate.Genre.FAMILYHOUSE));
@@ -63,7 +95,19 @@ public class RealEstateAgent {
         System.out.println("Sample data loaded: " + realEstates.size() + " properties.");
     }
 
-
+    /**
+     * Displays statistical analysis of the loaded properties and writes results to a file.
+     * <p>
+     * The analysis includes:
+     * <ul>
+     *   <li>Average square meter price</li>
+     *   <li>Cheapest property</li>
+     *   <li>Most expensive property in Budapest</li>
+     *   <li>Total price of all properties</li>
+     *   <li>Affordable condominiums below average price</li>
+     * </ul>
+     * @throws IOException if writing to the output file fails
+     */
     public static void displayResults() throws IOException {
         if (realEstates.isEmpty()) {
             System.out.println("No properties loaded. Cannot display results.");
@@ -135,10 +179,12 @@ public class RealEstateAgent {
         }
     }
 
+    /**
+     * Returns the set of all loaded real estate properties.
+     *
+     * @return the set of properties
+     */
     public static TreeSet<RealEstate> getRealEstates() {
         return realEstates;
     }
 }
-
-
-

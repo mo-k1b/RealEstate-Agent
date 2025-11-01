@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.example","l":"RealEstate.Genre"},{"p":"org.example","l":"Main"},{"p":"org.example","l":"Panel"},{"p":"org.example","l":"PanelInterface"},{"p":"org.example","l":"PropertyInterface"},{"p":"org.example","l":"RealEstate"},{"p":"org.example","l":"RealEstateAgent"}];updateSearchResults();
