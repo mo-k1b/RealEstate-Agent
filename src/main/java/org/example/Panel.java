@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.logging.*;
+
 /**
  * Represents a panel-type real estate property.
  * <p>
@@ -11,6 +13,11 @@ package org.example;
  * @author Mohammed Ba Dhib
  */
 public class Panel extends RealEstate implements PanelInterface {
+
+    /**
+     * Logger instance for this class. Uses centralized logging configured in Main class.
+     */
+    private static final Logger logger = Logger.getLogger(Panel.class.getName());
 
     /**
      * The number of floors in the property.
@@ -27,6 +34,7 @@ public class Panel extends RealEstate implements PanelInterface {
      */
     public Panel() {
         super();
+        logger.info("Creating new Panel instance with default constructor");
     }
 
     /**
@@ -43,8 +51,16 @@ public class Panel extends RealEstate implements PanelInterface {
     public Panel(String city, double price, double sqm, int numberOfRooms, Genre genre, int floor,
                  boolean isInsulated) {
         super(city, price, sqm, numberOfRooms, genre);
-        this.floor = floor;
-        this.isInsulated = isInsulated;
+        logger.info(String.format("Creating Panel: floor=%d, isInsulated=%b", floor, isInsulated));
+
+        try {
+            this.floor = floor;
+            this.isInsulated = isInsulated;
+            logger.info("Panel instance created successfully");
+        } catch (Exception e) {
+            logger.severe("Error creating Panel instance: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -53,6 +69,7 @@ public class Panel extends RealEstate implements PanelInterface {
      * @return the number of floors
      */
     public int getFloor() {
+        logger.info("Getting floor: " + floor);
         return floor;
     }
 
@@ -62,7 +79,13 @@ public class Panel extends RealEstate implements PanelInterface {
      * @param floor the number of floors to set
      */
     public void setFloor(int floor) {
-        this.floor = floor;
+        logger.info(String.format("Setting floor from %d to %d", this.floor, floor));
+        try {
+            this.floor = floor;
+        } catch (Exception e) {
+            logger.severe("Error setting floor: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -71,6 +94,7 @@ public class Panel extends RealEstate implements PanelInterface {
      * @return true if the property is insulated; false otherwise
      */
     public boolean isInsulated() {
+        logger.info("Getting insulation status: " + isInsulated);
         return isInsulated;
     }
 
@@ -80,7 +104,13 @@ public class Panel extends RealEstate implements PanelInterface {
      * @param insulated true if the property is insulated; false otherwise
      */
     public void setInsulated(boolean insulated) {
-        isInsulated = insulated;
+        logger.info(String.format("Setting insulation status from %b to %b", this.isInsulated, insulated));
+        try {
+            isInsulated = insulated;
+        } catch (Exception e) {
+            logger.severe("Error setting insulation status: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -91,16 +121,43 @@ public class Panel extends RealEstate implements PanelInterface {
      */
     @Override
     public int getTotalPrice() {
-        int price = super.getTotalPrice();
-        if (floor >= 0 && floor <= 2) {
-            price *= 1.05;
-        } else if (floor == 10) {
-            price *= 0.95;
+        logger.info(String.format("Calculating Panel total price: floor=%d, isInsulated=%b", floor, isInsulated));
+
+        try {
+            int price = super.getTotalPrice();
+            logger.info(String.format("Base total price from RealEstate: %d", price));
+
+            int originalPrice = price;
+
+            if (floor >= 0 && floor <= 2) {
+                price *= 1.05;
+                logger.info(String.format("Applied low floor bonus (1.05) for floor %d: price changed from %d to %d",
+                        floor, originalPrice, price));
+                originalPrice = price;
+            } else if (floor == 10) {
+                price *= 0.95;
+                logger.info(String.format("Applied top floor penalty (0.95) for floor 10: price changed from %d to %d",
+                        originalPrice, price));
+                originalPrice = price;
+            } else {
+                logger.info(String.format("No floor adjustment for floor %d", floor));
+            }
+
+            if (isInsulated) {
+                price *= 1.05;
+                logger.info(String.format("Applied insulation bonus (1.05): price changed from %d to %d",
+                        originalPrice, price));
+            } else {
+                logger.info("No insulation bonus applied");
+            }
+
+            logger.info(String.format("Final Panel total price: %d", price));
+            return price;
+
+        } catch (Exception e) {
+            logger.severe("Error calculating Panel total price: " + e.getMessage());
+            throw e;
         }
-
-        if (isInsulated) price *= 1.05;
-
-        return price;
     }
 
     /**
@@ -111,10 +168,17 @@ public class Panel extends RealEstate implements PanelInterface {
      */
     @Override
     public String toString() {
-        return super.toString() +
-                " is a Panel with " +
-                "floor=" + floor +
-                ", isInsulated=" + isInsulated;
+        logger.info("Generating string representation of Panel");
+        try {
+            String result = super.toString() +
+                    " is a Panel with " +
+                    "floor=" + floor +
+                    ", isInsulated=" + isInsulated;
+            return result;
+        } catch (Exception e) {
+            logger.severe("Error generating Panel toString: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -126,8 +190,26 @@ public class Panel extends RealEstate implements PanelInterface {
      */
     @Override
     public boolean hasSameAmount(RealEstate realEstate) {
-        if (realEstate == null) return false;
-        return realEstate.getTotalPrice() == this.getTotalPrice();
+        logger.info("Comparing total prices with another RealEstate");
+
+        try {
+            if (realEstate == null) {
+                logger.info("Comparison target is null, returning false");
+                return false;
+            }
+
+            int thisPrice = this.getTotalPrice();
+            int otherPrice = realEstate.getTotalPrice();
+            boolean result = otherPrice == thisPrice;
+
+            logger.info(String.format("Price comparison: this=%d, other=%d, result=%b",
+                    thisPrice, otherPrice, result));
+            return result;
+
+        } catch (Exception e) {
+            logger.severe("Error comparing prices: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -138,9 +220,22 @@ public class Panel extends RealEstate implements PanelInterface {
      */
     @Override
     public double roomPrice() {
-        if (numberOfRooms != 0) {
-            return super.price / numberOfRooms;
+        logger.info(String.format("Calculating room price: base price=%.2f, rooms=%d",
+                super.price, numberOfRooms));
+
+        try {
+            if (numberOfRooms != 0) {
+                double roomPrice = super.price / numberOfRooms;
+                logger.info(String.format("Room price calculated: %.2f", roomPrice));
+                return roomPrice;
+            }
+
+            logger.info("No rooms available, returning 0");
+            return 0;
+
+        } catch (Exception e) {
+            logger.severe("Error calculating room price: " + e.getMessage());
+            throw e;
         }
-        return 0;
     }
 }

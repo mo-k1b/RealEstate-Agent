@@ -1,0 +1,55 @@
+Nov 01, 2025 12:43:52 PM org.example.Main <clinit>
+INFO: ==========================================================
+Nov 01, 2025 12:43:52 PM org.example.Main <clinit>
+INFO: === Real Estate Application Started ===
+Nov 01, 2025 12:43:52 PM org.example.Main <clinit>
+INFO: Application start time: 2025-11-01 12:43:52
+Nov 01, 2025 12:43:52 PM org.example.Main <clinit>
+INFO: ==========================================================
+Nov 01, 2025 12:43:52 PM com.sun.jmx.interceptor.DefaultMBeanServerInterceptor registerDynamicMBean
+FINER: ObjectName = JMImplementation:type=MBeanServerDelegate
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Main method execution started
+Nov 01, 2025 12:43:52 PM com.sun.jmx.mbeanserver.Repository addMBean
+FINER: name = JMImplementation:type=MBeanServerDelegate
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Attempting to load real estate data from file: realestates.txt
+Nov 01, 2025 12:43:52 PM com.sun.jmx.interceptor.DefaultMBeanServerInterceptor registerWithRepository
+FINER: Send create notification of object JMImplementation:type=MBeanServerDelegate
+Nov 01, 2025 12:43:52 PM com.sun.jmx.interceptor.DefaultMBeanServerInterceptor sendNotification
+FINER: JMX.mbean.registered JMImplementation:type=MBeanServerDelegate
+Nov 01, 2025 12:43:52 PM org.example.RealEstateAgent loadFromFile
+INFO: Starting to load real estate data from file: realestates.txt
+Nov 01, 2025 12:43:52 PM org.example.RealEstateAgent loadFromFile
+SEVERE: File not found: realestates.txt - realestates.txt (The system cannot find the file specified)
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Data loading phase completed
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Attempting to display and analyze results
+Nov 01, 2025 12:43:52 PM org.example.RealEstateAgent displayResults
+INFO: Starting to display analysis results for 0 properties
+Nov 01, 2025 12:43:52 PM org.example.RealEstateAgent displayResults
+WARNING: No properties loaded. Cannot display results.
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Results display phase completed
+Nov 01, 2025 12:43:52 PM javax.management.StandardMBean getMBeanInfo
+FINER: Building MBeanInfo for sun.management.RuntimeImpl
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Program completed successfully without errors
+Nov 01, 2025 12:43:52 PM com.sun.jmx.interceptor.DefaultMBeanServerInterceptor registerDynamicMBean
+FINER: ObjectName = java.lang:type=Runtime
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: ==========================================================
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: === Real Estate Application Ended ===
+Nov 01, 2025 12:43:52 PM com.sun.jmx.mbeanserver.Repository addMBean
+FINER: name = java.lang:type=Runtime
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: Application end time: 2025-11-01 12:43:52
+Nov 01, 2025 12:43:52 PM com.sun.jmx.interceptor.DefaultMBeanServerInterceptor registerWithRepository
+FINER: Send create notification of object java.lang:type=Runtime
+Nov 01, 2025 12:43:52 PM org.example.Main main
+INFO: ==========================================================
+
+Nov 01, 2025 12:43:52 PM com.sun.jmx.interceptor.DefaultMBeanServerInterceptor sendNotification
+FINER: JMX.mbean.registered java.lang:type=Runtime
